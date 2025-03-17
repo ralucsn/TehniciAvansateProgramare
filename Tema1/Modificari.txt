@@ -1,0 +1,31 @@
+Am pornit de la codul sursa si am citit ce continea acesta.
+Apoi: 
+- am creat 2 foldere pentru membri si carti (Member si Book)
+    - in Book am creat:
+        - IBook.cs pentru a defini variabilele pentru titlu si autor
+        - IBookManagement.cs pentru a defini metodele AddBook, RemoveBook si ContainsBook utile in urmatoarea clasa
+        - BookManagement.cs ce mosteneste IBookManagement si se foloseste de metodele interfetei
+        - IBorRetProgram.cs pentru a defini metodele BorrowBook si ReturnBook
+        - BorRetProgram.cs ce mosteneste IBorRetProgram si se foloseste de metodele interfetei
+        - HorrorBook.cs si RomanceBook.cs ce mostenesc amandoua IBook, reprezinta 2 tipuri de carti, ulterior am constatat ca trebuie sa convertesc to string pentru a afisa cum trebuie in consola
+    - in Member am creat:
+        - IMember.cs pentru a defini variabilele pentru nume si prenume
+        - IMemberManagement.cs pentru a defini metodele AddMember si Contains Member 
+        - MemberManagement.cs ce mosteneste IMemberManagement si se foloseste de metodele interfetei
+        - Profesor.cs si Student.cs ce mostenesc IMember si reprezinta 2 tipuri de membri, am folosit acelasi tip de conversie si aici tot pentru acelasi motiv de mai sus
+- ulterior m-am ocupat si de ILibrarySystem.cs, la care am renuntat si am spart aceasta in clasa in 2 mai mici pe care le-am pus in folderul System
+    - IBookSystem.cs se ocupa de metodele AddBook, BorrowBook si ReturnBook
+    - IMemberSystem.cs se ocupa de metoda AddMember
+- LibrarySystem.cs mosteneste acum interfetele IBookSystem si IMemberSystem
+- am apelat apoi functiile pentru a adauga 2 membri, cate unul de fiecare tip, si 2 carti, cate una de fiecare tip, apoi am adaugat 2 carti, cate una de fiecare tip si am afisat in consola niste imprumuturi si returnari
+
+Cum am scapat practic de SOLID Principles Violations:
+- SRP: am creat clase separate pentru carti (IBook), membri(IMembers) si management(IBookManagement, IMemberManagement, IBorRetProgram)
+    - astfel nu mai LibrarySystem nu mai face atat de multe lucruri, iar daca vrem sa schimbam ceva la implementare, nu mai trebuie sa modificam tot sistemul 
+- OCP: am introdus IBook pentru multiple implementari (la crearea altor tipuri de carti: Romance si Horror)
+    - daca vrem acum sa mai punem o categorie de carti trebuie doar sa creem alta clasa, nu mai modificam tot codul
+- LSP: am creat IMember pentru a avea diferite tipuri de membri (Student si Profesor)
+    - in loc sa tratam fiecare membri drept stringuri, acum am introdus ideea de membri diferiti, un profesor poate imprumuta de exemplu mai multe carti decat un student
+- ISP: am creat interfete mai compacte
+    - ILibrarySystem obliga toate clasele sa implementeze toate metodele desi nu aveau poate nevoie de ele
+- DIP: am creat noi interfete pentru a scapa de "List<string>" si pentru a depinde de abstractizari
