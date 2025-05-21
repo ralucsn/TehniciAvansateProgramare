@@ -1,0 +1,4 @@
+Setup:
+1) Click dreapta pe "TAPproject.sln" si se va deschide proiectul
+2) Run command: dotnet ef database update   (pentru a actualiza bada de date cu migrarile create de mine)
+3) Rulare normala a aplicatiei
